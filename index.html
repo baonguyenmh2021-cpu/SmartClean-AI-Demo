@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartClean AI v2.0 - Nâng cấp Toàn diện (Demo)</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍃</text></svg>">
+<style>
+:root {
+  --primary: #00E5A0;
+  --primary-dark: #00B87A;
+  --accent: #FF6B35;
+  --bg: #060C14;
+  --bg2: #0A1525;
+  --bg3: #0F1E35;
+  --surface: #111D30;
+  --surface2: #162338;
+  --border: rgba(0,229,160,0.15);
+  --text: #E8F4F0;
+  --text-muted: #6B8FA0;
+  --text-dim: #3A5568;
+  --glow: 0 0 30px rgba(0,229,160,0.3);
+  --glow-sm: 0 0 12px rgba(0,229,160,0.2);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Be Vietnam Pro',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--primary-dark);border-radius:2px;}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 40px;
+  background:rgba(6,12,20,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-size:18px;font-weight:800;letter-spacing:-0.5px;
+  display:flex;align-items:center;gap:8px;
+}
+.nav-logo span{color:var(--primary);}
+.nav-logo .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--primary);
+  box-shadow:var(--glow-sm);
+  animation:pulse 2s infinite;
+}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{
+  color:var(--text-muted);font-size:13px;font-weight:500;
+  text-decoration:none;transition:color .2s;letter-spacing:.3px;
+}
+.nav-links a:hover{color:var(--primary);}
+.nav-cta{
+  background:var(--primary);color:#000;
+  padding:9px 22px;border-radius:8px;font-weight:700;font-size:13px;
+  text-decoration:none;transition:all .2s;
+}
+.nav-cta:hover{background:#fff;transform:translateY(-1px);}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%,rgba(0,229,160,0.08) 0%,transparent 70%),
+    radial-gradient(ellipse 30% 40% at 80% 60%,rgba(255,107,53,0.05) 0%,transparent 60%),
+    var(--bg);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,229,160,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,160,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 0%,transparent 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  text-align:center;max-width:900px;
+  padding:0 24px;padding-top:80px;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,229,160,0.08);
+  border:1px solid rgba(0,229,160,0.2);
+  border-radius:100px;padding:6px 16px;
+  font-size:12px;font-weight:600;color:var(--primary);
+  letter-spacing:.8px;text-transform:uppercase;
+  margin-bottom:32px;
+  animation:fadeDown .8s ease both;
+}
+.badge-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--primary);
+  box-shadow:0 0 8px var(--primary);
+  animation:pulse 1.5s infinite;
+}
+.hero-title{
+  font-size:clamp(44px,7vw,88px);
+  font-weight:900;line-height:1.0;
+  letter-spacing:-3px;
+  animation:fadeUp .9s ease .1s both;
+}
+.hero-title .line1{display:block;color:var(--text);}
+.hero-title .line2{
+  display:block;
+  background:linear-gradient(135deg,var(--primary) 0%,#00FFD1 60%,var(--primary) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200% auto;
+  animation:shimmer 3s linear infinite;
+}
+.hero-sub{
+  margin-top:20px;font-size:17px;color:var(--text-muted);
+  font-weight:400;line-height:1.7;max-width:560px;margin-left:auto;margin-right:auto;
+  animation:fadeUp .9s ease .2s both;
+}
+.hero-stats{
+  display:flex;justify-content:center;gap:48px;
+  margin-top:52px;
+  animation:fadeUp .9s ease .3s both;
+}
+.stat-item{text-align:center;}
+.stat-number{
+  font-size:38px;font-weight:900;color:var(--primary);
+  line-height:1;font-family:'Space Mono',monospace;
+  text-shadow:0 0 20px rgba(0,229,160,0.4);
+}
+.stat-label{
+  font-size:11px;color:var(--text-dim);font-weight:600;
+  letter-spacing:.8px;text-transform:uppercase;margin-top:4px;
+}
+.hero-btns{
+  display:flex;gap:16px;justify-content:center;margin-top:44px;
+  animation:fadeUp .9s ease .35s both;
+}
+.btn-primary{
+  background:var(--primary);color:#000;
+  padding:14px 32px;border-radius:10px;font-weight:800;font-size:15px;
+  border:none;cursor:pointer;transition:all .25s;
+  box-shadow:0 4px 24px rgba(0,229,160,0.35);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(0,229,160,0.5);}
+.btn-ghost{
+  background:transparent;color:var(--text);
+  padding:14px 32px;border-radius:10px;font-weight:600;font-size:15px;
+  border:1px solid var(--border);cursor:pointer;transition:all .25s;
+}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary);}
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--text-dim);font-size:11px;letter-spacing:.6px;
+  animation:fadeUp .9s ease .5s both;
+}
+.scroll-line{
+  width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--primary));
+  animation:scrollDown 1.5s ease-in-out infinite;
+}
+
+/* ─── SECTION LAYOUT ─── */
+section{padding:100px 40px;}
+.section-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--primary);
+  margin-bottom:16px;
+}
+.section-tag::before{
+  content:'';width:24px;height:2px;background:var(--primary);
+  border-radius:1px;
+}
+.section-title{
+  font-size:clamp(30px,4vw,50px);font-weight:900;
+  letter-spacing:-1.5px;line-height:1.1;
+}
+.section-sub{
+  color:var(--text-muted);font-size:16px;line-height:1.7;
+  max-width:500px;margin-top:12px;
+}
+
+/* ─── AI DEMO ─── */
+#ai-section{background:var(--bg2);}
+.ai-container{max-width:1200px;margin:0 auto;}
+.ai-header{margin-bottom:60px;}
+.ai-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+
+/* Before/After Slider — Real Image Version */
+.before-after-wrap{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  cursor:ew-resize;user-select:none;
+  touch-action:none;
+}
+.ba-images{position:relative;height:420px;background:#060C14;}
+
+/* Both images fill the container absolutely */
+.ba-before,.ba-after{
+  position:absolute;inset:0;width:100%;height:100%;
+  overflow:hidden;
+}
+.ba-before img,.ba-after img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  display:block;pointer-events:none;
+}
+/* AFTER is clipped — only left portion visible, no right clip default */
+.ba-after{
+  clip-path:inset(0 50% 0 0);
+  /* tiny overlay tint to look slightly cleaner/brighter */
+}
+.ba-after img{filter:brightness(1.08) saturate(1.1);}
+
+/* Scanline overlay on BEFORE to make it look grimier */
+.ba-before::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px);
+  pointer-events:none;
+}
+
+/* Labels */
+.ba-label{
+  position:absolute;bottom:14px;z-index:20;
+  font-size:11px;font-weight:700;letter-spacing:.8px;
+  padding:5px 12px;border-radius:6px;
+  font-family:'Space Mono',monospace;
+}
+.label-before{left:14px;background:rgba(200,60,30,0.75);border:1px solid rgba(255,80,50,0.5);color:#fff;backdrop-filter:blur(6px);}
+.label-after{right:14px;background:rgba(0,100,70,0.75);border:1px solid rgba(0,229,160,0.4);color:#00FFB0;backdrop-filter:blur(6px);}
+
+/* Handle line */
+.ba-handle{
+  position:absolute;top:0;bottom:0;width:3px;
+  background:var(--primary);
+  left:50%;transform:translateX(-50%);
+  z-index:15;pointer-events:none;
+  box-shadow:0 0 20px rgba(0,229,160,0.8),0 0 60px rgba(0,229,160,0.3);
+}
+.ba-handle-circle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:48px;height:48px;border-radius:50%;
+  background:var(--primary);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 3px rgba(0,229,160,0.3),0 0 24px rgba(0,229,160,0.7);
+  color:#000;font-weight:900;font-size:18px;
+  letter-spacing:-2px;
+}
+
+/* ── BOUNDING BOXES — single overlay layer above both images ── */
+/* All bboxes live in .ba-overlay which sits above both img layers */
+.ba-overlay{
+  position:absolute;inset:0;z-index:10;pointer-events:none;
+}
+.ai-bbox{
+  position:absolute;border:2px solid;border-radius:6px;
+  pointer-events:none;
+  transition:opacity .25s ease, border-color .25s ease;
+}
+/* Dirty boxes (red) — visible when handle is on the left (BEFORE side) */
+.bbox-dirty{
+  border-color:#FF4444;
+  background:rgba(255,68,68,0.10);
+  box-shadow:0 0 10px rgba(255,68,68,0.25) inset;
+}
+/* Clean boxes (green) — visible when handle is on the right (AFTER side) */
+.bbox-clean{
+  border-color:#00E5A0;
+  background:rgba(0,229,160,0.08);
+  box-shadow:0 0 10px rgba(0,229,160,0.2) inset;
+}
+.bbox-label{
+  position:absolute;top:-24px;left:0;
+  font-size:10px;font-weight:700;letter-spacing:.5px;
+  padding:2px 8px;border-radius:4px;
+  font-family:'Space Mono',monospace;white-space:nowrap;
+}
+.bbox-dirty .bbox-label{background:#FF4444;color:#fff;}
+.bbox-clean .bbox-label{background:#00E5A0;color:#000;}
+.bbox-conf{
+  position:absolute;bottom:-22px;right:0;
+  font-size:10px;font-weight:600;
+  font-family:'Space Mono',monospace;
+}
+.bbox-dirty .bbox-conf{color:#FF8060;}
+.bbox-clean .bbox-conf{color:#00E5A0;}
+
+/* AI scan line animation on BEFORE side */
+@keyframes aiScan{
+  0%{top:-4px;opacity:.6;}
+  100%{top:100%;opacity:0;}
+}
+.ai-scanline{
+  position:absolute;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,rgba(255,68,68,0.6),transparent);
+  animation:aiScan 3s linear infinite;
+  pointer-events:none;z-index:5;
+}
+
+/* AI Info Panel */
+.ai-panel{display:flex;flex-direction:column;gap:24px;}
+.ai-metric{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:20px;
+  transition:border-color .3s;
+}
+.ai-metric:hover{border-color:rgba(0,229,160,0.35);}
+.metric-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.metric-name{font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.4px;}
+.metric-value{font-size:22px;font-weight:900;color:var(--primary);font-family:'Space Mono',monospace;}
+.metric-bar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;}
+.metric-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--primary-dark),var(--primary));transition:width 1s ease;}
+.ai-detections{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:20px;
+}
+.detection-title{font-size:12px;font-weight:700;color:var(--text-muted);letter-spacing:.6px;text-transform:uppercase;margin-bottom:14px;}
+.detection-list{display:flex;flex-direction:column;gap:10px;}
+.detection-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 12px;background:var(--bg3);border-radius:8px;
+}
+.det-icon{font-size:16px;margin-right:8px;}
+.det-name{font-size:13px;font-weight:500;flex:1;}
+.det-score{
+  font-size:11px;font-weight:700;padding:3px 8px;border-radius:100px;
+  font-family:'Space Mono',monospace;
+}
+.high{background:rgba(255,68,68,0.15);color:#FF6060;}
+.med{background:rgba(255,165,0,0.15);color:#FFA040;}
+.low{background:rgba(0,229,160,0.15);color:var(--primary);}
+
+/* ─── SMART DISPATCH ─── */
+#dispatch-section{background:var(--bg);}
+.dispatch-container{max-width:1200px;margin:0 auto;}
+.dispatch-layout{display:grid;grid-template-columns:1fr 380px;gap:32px;margin-top:60px;}
+
+/* Map */
+.map-wrapper{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);height:520px;
+  background:#060E1A;
+}
+.map-canvas{position:relative;width:100%;height:100%;}
+/* SVG map of Da Nang */
+.map-svg{width:100%;height:100%;position:absolute;inset:0;}
+.road{stroke:rgba(0,229,160,0.12);stroke-width:1.5;fill:none;}
+.road-main{stroke:rgba(0,229,160,0.2);stroke-width:2.5;}
+.district{fill:rgba(0,229,160,0.03);stroke:rgba(0,229,160,0.08);stroke-width:1;}
+.coast{fill:none;stroke:rgba(0,150,255,0.2);stroke-width:2;stroke-dasharray:6,4;}
+.worker-marker{
+  position:absolute;transform:translate(-50%,-50%);
+  width:36px;height:36px;cursor:pointer;
+  transition:left 3s ease,top 3s ease;
+}
+.worker-dot{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;border:2px solid var(--primary);
+  background:var(--surface);
+  box-shadow:0 0 14px rgba(0,229,160,0.35);
+  transition:all .3s;
+}
+.worker-dot:hover{transform:scale(1.15);box-shadow:0 0 24px rgba(0,229,160,0.6);}
+.worker-name-tag{
+  position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);
+  font-size:10px;font-weight:700;color:var(--primary);
+  background:var(--surface);padding:2px 8px;border-radius:100px;
+  border:1px solid var(--border);white-space:nowrap;
+}
+.pulse-ring{
+  position:absolute;inset:-6px;border-radius:50%;
+  border:2px solid var(--primary);
+  animation:ring-expand 2s ease-out infinite;opacity:0;
+}
+.customer-pin{
+  position:absolute;transform:translate(-50%,-50%);
+  animation:pinDrop .5s ease both;
+}
+.customer-pin-inner{
+  width:20px;height:20px;background:var(--accent);
+  border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+  border:2px solid #fff;
+  box-shadow:0 0 16px rgba(255,107,53,0.7);
+}
+.route-svg{position:absolute;inset:0;pointer-events:none;}
+.eta-badge{
+  position:absolute;top:14px;right:14px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:12px 16px;
+  font-family:'Space Mono',monospace;
+}
+.eta-label{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.6px;}
+.eta-value{font-size:24px;font-weight:700;color:var(--primary);}
+.eta-unit{font-size:11px;color:var(--text-muted);}
+.map-overlay{
+  position:absolute;top:14px;left:14px;
+  display:flex;gap:8px;
+}
+.map-btn{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:7px 12px;font-size:11px;font-weight:600;
+  color:var(--text-muted);cursor:pointer;transition:all .2s;
+}
+.map-btn.active,.map-btn:hover{border-color:var(--primary);color:var(--primary);}
+
+/* Order Log */
+.order-log{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  display:flex;flex-direction:column;gap:16px;
+  height:520px;overflow:hidden;
+}
+.log-title{font-size:13px;font-weight:700;color:var(--text-muted);letter-spacing:.6px;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.live-dot{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--primary);
+}
+.live-dot::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--primary);animation:pulse 1.5s infinite;
+}
+.log-entries{display:flex;flex-direction:column;gap:10px;overflow-y:auto;flex:1;}
+.log-entry{
+  background:var(--bg3);border-radius:10px;padding:12px 14px;
+  border-left:3px solid;
+  animation:slideInRight .4s ease both;
+}
+.log-entry.confirmed{border-color:var(--primary);}
+.log-entry.en-route{border-color:#3B82F6;}
+.log-entry.arrived{border-color:#F59E0B;}
+.log-entry.completed{border-color:#8B5CF6;}
+.log-time{font-size:10px;color:var(--text-dim);font-family:'Space Mono',monospace;margin-bottom:4px;}
+.log-msg{font-size:12px;font-weight:500;line-height:1.5;}
+.log-icon{margin-right:6px;}
+.worker-cards{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.worker-card{
+  background:var(--bg3);border-radius:10px;padding:12px 14px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.wc-avatar{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;border:2px solid var(--primary);
+  background:var(--surface);flex-shrink:0;
+}
+.wc-info{flex:1;}
+.wc-name{font-size:13px;font-weight:700;}
+.wc-status{font-size:11px;color:var(--text-muted);}
+.wc-badge{
+  font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px;
+  background:rgba(0,229,160,0.15);color:var(--primary);
+  font-family:'Space Mono',monospace;
+}
+
+/* ─── BOOKING WIZARD ─── */
+#booking-section{background:var(--bg2);}
+.booking-container{max-width:900px;margin:0 auto;}
+.wizard-steps{
+  display:flex;align-items:center;gap:0;margin:48px 0 52px;
+}
+.step-item{
+  display:flex;align-items:center;gap:12px;flex:1;
+}
+.step-item:last-child{flex:0;}
+.step-circle{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;border:2px solid var(--text-dim);
+  color:var(--text-dim);background:transparent;
+  transition:all .3s;flex-shrink:0;
+}
+.step-circle.active{
+  background:var(--primary);border-color:var(--primary);
+  color:#000;box-shadow:0 0 20px rgba(0,229,160,0.4);
+}
+.step-circle.done{
+  background:var(--primary-dark);border-color:var(--primary-dark);
+  color:#000;
+}
+.step-line{flex:1;height:2px;background:var(--text-dim);transition:background .5s;}
+.step-line.done{background:var(--primary);}
+.step-label{font-size:11px;font-weight:600;color:var(--text-dim);position:absolute;margin-top:50px;white-space:nowrap;}
+
+/* Wizard panels */
+.wizard-panel{display:none;}
+.wizard-panel.active{display:block;animation:fadeUp .4s ease both;}
+.wizard-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.input-group{display:flex;flex-direction:column;gap:8px;}
+.input-label{font-size:12px;font-weight:700;color:var(--text-muted);letter-spacing:.4px;text-transform:uppercase;}
+.input-field{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  color:var(--text);font-size:14px;font-family:'Be Vietnam Pro',sans-serif;
+  transition:border-color .2s;outline:none;
+}
+.input-field:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,229,160,0.1);}
+.input-field::placeholder{color:var(--text-dim);}
+.service-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;}
+.service-card{
+  background:var(--surface);border:2px solid var(--border);
+  border-radius:var(--radius-sm);padding:20px 16px;text-align:center;
+  cursor:pointer;transition:all .25s;
+}
+.service-card:hover,.service-card.selected{
+  border-color:var(--primary);background:rgba(0,229,160,0.05);
+}
+.service-card.selected{box-shadow:0 0 20px rgba(0,229,160,0.15);}
+.sc-icon{font-size:28px;margin-bottom:10px;}
+.sc-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+.sc-price{font-size:12px;color:var(--primary);font-family:'Space Mono',monospace;}
+/* Price summary */
+.price-summary{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;margin-top:32px;
+}
+.ps-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.ps-row:last-child{border:none;padding-top:16px;}
+.ps-label{font-size:13px;color:var(--text-muted);}
+.ps-value{font-size:13px;font-weight:600;}
+.ps-total .ps-label{font-size:16px;font-weight:700;color:var(--text);}
+.ps-total .ps-value{font-size:28px;font-weight:900;color:var(--primary);font-family:'Space Mono',monospace;}
+/* Time estimate */
+.time-estimate{
+  display:flex;gap:16px;margin-top:20px;
+}
+.te-box{
+  flex:1;background:var(--bg3);border-radius:10px;padding:16px;text-align:center;
+  border:1px solid var(--border);
+}
+.te-value{font-size:30px;font-weight:900;color:var(--primary);font-family:'Space Mono',monospace;}
+.te-label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.6px;margin-top:4px;}
+.range-wrapper{display:flex;flex-direction:column;gap:8px;}
+.range-input{
+  -webkit-appearance:none;width:100%;height:6px;
+  background:var(--surface2);border-radius:3px;outline:none;
+  cursor:pointer;
+}
+.range-input::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--primary);cursor:pointer;
+  box-shadow:0 0 12px rgba(0,229,160,0.5);
+  border:2px solid #000;
+}
+.wizard-nav{display:flex;gap:12px;justify-content:flex-end;margin-top:32px;}
+.step-back{
+  background:transparent;border:1px solid var(--border);
+  color:var(--text-muted);padding:12px 28px;border-radius:10px;
+  font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.step-back:hover{border-color:var(--text-muted);color:var(--text);}
+.step-next{
+  background:var(--primary);color:#000;
+  padding:12px 32px;border-radius:10px;
+  font-size:14px;font-weight:800;cursor:pointer;
+  border:none;transition:all .25s;
+  box-shadow:0 4px 20px rgba(0,229,160,0.3);
+}
+.step-next:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,229,160,0.5);}
+.confirm-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:32px;
+}
+.confirm-row{
+  display:flex;justify-content:space-between;
+  padding:12px 0;border-bottom:1px solid var(--border);
+  font-size:14px;
+}
+.confirm-row:last-child{border:none;}
+.confirm-key{color:var(--text-muted);}
+.confirm-val{font-weight:600;}
+.success-state{text-align:center;padding:60px 20px;}
+.success-icon{font-size:64px;margin-bottom:20px;animation:bounceIn .5s ease both;}
+.success-title{font-size:28px;font-weight:900;margin-bottom:12px;color:var(--primary);}
+.success-sub{color:var(--text-muted);font-size:15px;line-height:1.7;}
+.order-id{
+  display:inline-block;background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:8px 20px;
+  font-family:'Space Mono',monospace;font-size:18px;font-weight:700;
+  color:var(--primary);margin:16px 0;
+}
+
+/* ─── STAFF DASHBOARD ─── */
+#staff-section{background:var(--bg);}
+.staff-container{max-width:1200px;margin:0 auto;}
+.staff-layout{display:grid;grid-template-columns:340px 1fr;gap:32px;margin-top:60px;align-items:start;}
+
+/* Mobile App Frame */
+.app-frame{
+  background:#0A0A0A;border-radius:40px;padding:12px;
+  border:6px solid #1A1A1A;
+  box-shadow:0 30px 80px rgba(0,0,0,0.8),inset 0 0 0 1px rgba(255,255,255,0.05);
+  max-width:340px;
+}
+.app-screen{
+  background:var(--bg2);border-radius:30px;overflow:hidden;
+  min-height:640px;display:flex;flex-direction:column;
+}
+.app-status-bar{
+  background:var(--bg);padding:10px 20px 6px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.app-time{font-size:14px;font-weight:700;font-family:'Space Mono',monospace;}
+.app-icons{display:flex;gap:6px;align-items:center;font-size:12px;}
+.app-header{
+  background:var(--surface);padding:16px 20px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.app-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  flex-shrink:0;
+}
+.app-user-name{font-size:14px;font-weight:700;}
+.app-user-status{font-size:11px;color:var(--primary);display:flex;align-items:center;gap:4px;}
+.app-user-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--primary);animation:pulse 2s infinite;}
+.app-earnings-strip{
+  background:linear-gradient(135deg,rgba(0,229,160,0.15),rgba(0,229,160,0.05));
+  padding:14px 20px;display:flex;justify-content:space-around;
+  border-bottom:1px solid var(--border);
+}
+.ae-item{text-align:center;}
+.ae-value{font-size:18px;font-weight:900;color:var(--primary);font-family:'Space Mono',monospace;}
+.ae-label{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;}
+.app-tabs{
+  display:flex;background:var(--surface);
+  border-bottom:1px solid var(--border);
+}
+.app-tab{
+  flex:1;padding:10px;text-align:center;font-size:11px;font-weight:600;
+  color:var(--text-dim);cursor:pointer;transition:all .2s;
+  border-bottom:2px solid transparent;
+}
+.app-tab.active{color:var(--primary);border-bottom-color:var(--primary);}
+.app-orders{flex:1;padding:14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;}
+.app-order{
+  background:var(--surface);border-radius:14px;
+  border:1px solid var(--border);overflow:hidden;
+  transition:all .3s;
+}
+.app-order.new-order{
+  border-color:var(--accent);
+  box-shadow:0 0 20px rgba(255,107,53,0.2);
+  animation:newOrderPulse 1s ease infinite alternate;
+}
+.ao-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 14px;
+}
+.ao-id{font-size:11px;font-family:'Space Mono',monospace;color:var(--text-dim);}
+.ao-badge{
+  font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;
+}
+.ao-badge.new{background:rgba(255,107,53,0.2);color:var(--accent);}
+.ao-badge.active{background:rgba(0,229,160,0.15);color:var(--primary);}
+.ao-badge.done{background:rgba(139,92,246,0.15);color:#8B5CF6;}
+.ao-body{padding:0 14px 12px;border-top:1px solid var(--border);}
+.ao-address{font-size:12px;font-weight:500;padding:10px 0 6px;}
+.ao-meta{display:flex;gap:12px;}
+.ao-meta span{font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;}
+.ao-actions{display:flex;gap:8px;padding:10px 14px;background:var(--bg3);}
+.ao-btn-accept{
+  flex:1;background:var(--primary);color:#000;border:none;
+  border-radius:8px;padding:9px;font-size:12px;font-weight:800;
+  cursor:pointer;transition:all .2s;
+}
+.ao-btn-accept:hover{transform:scale(1.02);}
+.ao-btn-decline{
+  background:transparent;color:var(--text-dim);border:1px solid var(--border);
+  border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;
+  cursor:pointer;
+}
+.app-bottom-nav{
+  background:var(--bg);border-top:1px solid var(--border);
+  display:flex;padding:10px 0 14px;
+}
+.bn-item{
+  flex:1;text-align:center;font-size:10px;color:var(--text-dim);cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  transition:color .2s;
+}
+.bn-item.active,.bn-item:hover{color:var(--primary);}
+.bn-icon{font-size:20px;}
+
+/* Staff Dashboard Right */
+.staff-right{display:flex;flex-direction:column;gap:24px;}
+.staff-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.kpi-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:20px;
+  transition:all .3s;
+}
+.kpi-card:hover{border-color:rgba(0,229,160,0.3);transform:translateY(-2px);}
+.kpi-icon{font-size:24px;margin-bottom:10px;}
+.kpi-val{font-size:28px;font-weight:900;color:var(--primary);font-family:'Space Mono',monospace;}
+.kpi-name{font-size:11px;color:var(--text-dim);font-weight:600;letter-spacing:.4px;text-transform:uppercase;margin-top:2px;}
+.staff-activity{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+}
+.sa-title{font-size:13px;font-weight:700;color:var(--text-muted);letter-spacing:.6px;text-transform:uppercase;margin-bottom:20px;}
+.activity-items{display:flex;flex-direction:column;gap:0;}
+.act-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.act-item:last-child{border:none;}
+.act-line{display:flex;flex-direction:column;align-items:center;gap:0;}
+.act-dot{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;
+  margin-top:4px;
+}
+.act-connector{width:1px;flex:1;background:var(--border);min-height:20px;margin-top:4px;}
+.act-item:last-child .act-connector{display:none;}
+.act-info{flex:1;}
+.act-title{font-size:13px;font-weight:600;margin-bottom:2px;}
+.act-detail{font-size:11px;color:var(--text-muted);}
+.act-time{font-size:10px;color:var(--text-dim);font-family:'Space Mono',monospace;margin-top:4px;}
+
+/* ─── ANIMATIONS ─── */
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+@keyframes shimmer{0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scrollDown{0%,100%{opacity:0;transform:scaleY(0);transform-origin:top;}50%{opacity:1;transform:scaleY(1);}}
+@keyframes ring-expand{0%{transform:scale(1);opacity:.8;}100%{transform:scale(2.2);opacity:0;}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+@keyframes pinDrop{0%{opacity:0;transform:translate(-50%,-50%) scale(0) translateY(-30px);}100%{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+@keyframes bounceIn{0%{transform:scale(0);}60%{transform:scale(1.1);}100%{transform:scale(1);}}
+@keyframes newOrderPulse{from{box-shadow:0 0 16px rgba(255,107,53,0.2);}to{box-shadow:0 0 30px rgba(255,107,53,0.4);}}
+@keyframes counterUp{from{opacity:0;}to{opacity:1;}}
+@keyframes workerMove{0%,100%{opacity:1;}50%{opacity:.7;}}
+@keyframes dash{to{stroke-dashoffset:0;}}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .ai-layout,.dispatch-layout,.staff-layout,.wizard-grid{grid-template-columns:1fr;}
+  nav{padding:14px 20px;}
+  section{padding:70px 20px;}
+  .hero-stats{gap:24px;}
+  .service-cards{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="dot"></div>
+    Smart<span>Clean</span> AI
+  </div>
+  <div class="nav-links">
+    <a href="#ai-section">Công nghệ</a>
+    <a href="#dispatch-section">Dispatch</a>
+    <a href="#booking-section">Đặt lịch</a>
+    <a href="#staff-section">Nhân viên</a>
+  </div>
+  <a href="#booking-section" class="nav-cta">Đặt ngay</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span> Hoạt động tại Đà Nẵng · Real-time AI</div>
+    <h1 class="hero-title">
+      <span class="line1">Sạch bóng.</span>
+      <span class="line2">Thông minh tuyệt đối.</span>
+    </h1>
+    <p class="hero-sub">Dịch vụ vệ sinh thế hệ mới — AI nhận diện vết bẩn, điều phối tự động, đến trong 29 phút.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number" data-target="98.7" data-suffix="%">0%</div>
+        <div class="stat-label">Độ chính xác AI</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="29" data-suffix="'">0'</div>
+        <div class="stat-label">Phút đến nơi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="4831" data-suffix="">0</div>
+        <div class="stat-label">Đơn hoàn thành</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="4.9" data-suffix="★">0★</div>
+        <div class="stat-label">Đánh giá TB</div>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('booking-section').scrollIntoView({behavior:'smooth'})">✦ Đặt lịch hôm nay</button>
+      <button class="btn-ghost" onclick="document.getElementById('ai-section').scrollIntoView({behavior:'smooth'})">Xem demo AI →</button>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════ AI SECTION ═══════════ -->
+<section id="ai-section">
+  <div class="ai-container">
+    <div class="ai-header reveal">
+      <div class="section-tag">Công nghệ lõi</div>
+      <h2 class="section-title">AI nhìn thấy<br>những gì mắt thường bỏ qua</h2>
+      <p class="section-sub">Model nhận diện vết bẩn được huấn luyện trên 200,000+ ảnh thực tế tại Việt Nam.</p>
+    </div>
+
+    <div class="ai-layout">
+      <!-- Before/After Slider -->
+      <div class="reveal" style="transition-delay:.1s">
+        <div class="before-after-wrap" id="baWrap">
+          <div class="ba-images" id="baImages">
+
+            <!-- ── BEFORE: dirty room (real photo from Unsplash) ── -->
+            <div class="ba-before" id="baBefore">
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+                alt="Phòng bẩn trước khi dọn"
+                onerror="this.src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80'"
+              >
+              <!-- red AI scan line sweeping down -->
+              <div class="ai-scanline"></div>
+            </div>
+
+            <!-- ── AFTER: clean room (real photo from Unsplash) ── -->
+            <div class="ba-after" id="baAfter">
+              <img
+                src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&q=80"
+                alt="Phòng sạch sau khi dọn"
+                onerror="this.src='https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80'"
+              >
+            </div>
+
+            <!-- ── SINGLE overlay layer for ALL bboxes ── -->
+            <!-- shown/hidden by JS based on handle position; never duplicated -->
+            <div class="ba-overlay">
+              <!-- DIRTY boxes (red) — appear on BEFORE half -->
+              <div class="ai-bbox bbox-dirty" data-side="dirty" style="left:8%;top:52%;width:26%;height:28%">
+                <div class="bbox-label">FLOOR_STAIN</div>
+                <div class="bbox-conf">conf: 0.96</div>
+              </div>
+              <div class="ai-bbox bbox-dirty" data-side="dirty" style="left:52%;top:58%;width:32%;height:24%">
+                <div class="bbox-label">ORGANIC_SPILL</div>
+                <div class="bbox-conf">conf: 0.87</div>
+              </div>
+              <div class="ai-bbox bbox-dirty" data-side="dirty" style="left:18%;top:18%;width:28%;height:34%">
+                <div class="bbox-label">WALL_SMEAR</div>
+                <div class="bbox-conf">conf: 0.91</div>
+              </div>
+              <!-- CLEAN boxes (green) — appear on AFTER half -->
+              <div class="ai-bbox bbox-clean" data-side="clean" style="left:8%;top:52%;width:26%;height:28%;opacity:0">
+                <div class="bbox-label">CLEANED ✓</div>
+                <div class="bbox-conf">score: 1.00</div>
+              </div>
+              <div class="ai-bbox bbox-clean" data-side="clean" style="left:52%;top:58%;width:32%;height:24%;opacity:0">
+                <div class="bbox-label">CLEANED ✓</div>
+                <div class="bbox-conf">score: 1.00</div>
+              </div>
+              <div class="ai-bbox bbox-clean" data-side="clean" style="left:18%;top:18%;width:28%;height:34%;opacity:0">
+                <div class="bbox-label">CLEANED ✓</div>
+                <div class="bbox-conf">score: 1.00</div>
+              </div>
+            </div>
+
+            <!-- Labels -->
+            <div class="ba-label label-before">● BEFORE</div>
+            <div class="ba-label label-after">✓ AFTER</div>
+
+            <!-- Handle -->
+            <div class="ba-handle" id="baHandle">
+              <div class="ba-handle-circle">◀▶</div>
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center;font-size:12px;color:var(--text-dim);margin-top:12px;font-style:italic;">← Kéo để so sánh Before / After →</p>
+      </div>
+
+      <!-- AI Metrics Panel -->
+      <div class="ai-panel reveal" style="transition-delay:.2s">
+        <div class="ai-metric">
+          <div class="metric-top">
+            <div class="metric-name">🎯 ĐỘ CHÍNH XÁC NHẬN DIỆN</div>
+            <div class="metric-value" id="acc-val">98.7%</div>
+          </div>
+          <div class="metric-bar"><div class="metric-fill" style="width:98.7%"></div></div>
+        </div>
+        <div class="ai-metric">
+          <div class="metric-top">
+            <div class="metric-name">⚡ TỐC ĐỘ XỬ LÝ</div>
+            <div class="metric-value">47ms</div>
+          </div>
+          <div class="metric-bar"><div class="metric-fill" style="width:85%;background:linear-gradient(90deg,#3B82F6,#60A5FA)"></div></div>
+        </div>
+        <div class="ai-metric">
+          <div class="metric-top">
+            <div class="metric-name">🧠 MÔ HÌNH AI</div>
+            <div class="metric-value">v4.2</div>
+          </div>
+          <div class="metric-bar"><div class="metric-fill" style="width:72%;background:linear-gradient(90deg,#8B5CF6,#A78BFA)"></div></div>
+        </div>
+        <div class="ai-detections">
+          <div class="detection-title">🔍 Phát hiện trong frame này</div>
+          <div class="detection-list">
+            <div class="detection-row">
+              <span class="det-icon">💧</span>
+              <span class="det-name">Vết nước / Mud Stain</span>
+              <span class="det-score high">94%</span>
+            </div>
+            <div class="detection-row">
+              <span class="det-icon">🟤</span>
+              <span class="det-name">Hữu cơ / Organic</span>
+              <span class="det-score high">87%</span>
+            </div>
+            <div class="detection-row">
+              <span class="det-icon">🫧</span>
+              <span class="det-name">Bụi tường / Wall Smear</span>
+              <span class="det-score med">91%</span>
+            </div>
+            <div class="detection-row">
+              <span class="det-icon">✅</span>
+              <span class="det-name">Vùng sạch / Clean Zone</span>
+              <span class="det-score low">100%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SMART DISPATCH ═══════════ -->
+<section id="dispatch-section">
+  <div class="dispatch-container">
+    <div class="reveal">
+      <div class="section-tag">Smart Dispatch</div>
+      <h2 class="section-title">Điều phối thời gian<br>thực tại Đà Nẵng</h2>
+      <p class="section-sub">AI phân công nhân viên gần nhất, vẽ tuyến đường tối ưu, đến nơi trong 29 phút.</p>
+    </div>
+
+    <div class="dispatch-layout">
+      <!-- Map -->
+      <div class="map-wrapper reveal" style="transition-delay:.15s">
+        <div class="map-canvas" id="mapCanvas">
+          <!-- SVG Map of Da Nang -->
+          <svg class="map-svg" viewBox="0 0 700 520" id="mapSvg">
+            <!-- Background -->
+            <rect width="700" height="520" fill="#060E1A"/>
+            <!-- Districts - simplified Da Nang geometry -->
+            <polygon points="50,80 200,60 280,100 300,180 250,240 180,260 80,220 40,160" class="district"/>
+            <polygon points="280,100 380,80 420,140 380,200 300,180" class="district"/>
+            <polygon points="50,220 180,260 200,320 160,380 80,360 30,300" class="district"/>
+            <polygon points="180,260 300,180 380,200 360,300 280,340 200,320" class="district"/>
+            <polygon points="360,140 500,100 520,200 460,260 380,200 420,140" class="district"/>
+            <polygon points="360,300 460,260 520,200 560,280 480,360 380,380" class="district"/>
+            <!-- Coastline - East -->
+            <polyline points="500,60 510,100 520,150 530,200 520,260 510,320 500,380 490,420 470,480" class="coast"/>
+            <!-- Sea blocks -->
+            <rect x="520" y="60" width="180" height="460" fill="rgba(0,60,120,0.15)"/>
+            <text x="600" y="260" font-family="Be Vietnam Pro" font-size="11" fill="rgba(0,150,255,0.3)" text-anchor="middle" transform="rotate(90,600,260)">BIỂN ĐÔNG</text>
+            <!-- Main roads -->
+            <line x1="0" y1="190" x2="700" y2="190" class="road-main"/>
+            <line x1="0" y1="310" x2="700" y2="310" class="road-main"/>
+            <line x1="180" y1="0" x2="180" y2="520" class="road-main"/>
+            <line x1="350" y1="0" x2="350" y2="520" class="road-main"/>
+            <line x1="480" y1="0" x2="480" y2="520" class="road-main"/>
+            <!-- Secondary roads -->
+            <line x1="0" y1="120" x2="700" y2="120" class="road"/>
+            <line x1="0" y1="260" x2="700" y2="260" class="road"/>
+            <line x1="0" y1="380" x2="700" y2="380" class="road"/>
+            <line x1="80" y1="0" x2="80" y2="520" class="road"/>
+            <line x1="260" y1="0" x2="260" y2="520" class="road"/>
+            <line x1="420" y1="0" x2="420" y2="520" class="road"/>
+            <!-- Bridge (Cau Han River) -->
+            <line x1="200" y1="240" x2="350" y2="240" stroke="rgba(0,229,160,0.25)" stroke-width="4" stroke-dasharray="8,4"/>
+            <text x="275" y="228" font-family="Be Vietnam Pro" font-size="9" fill="rgba(0,229,160,0.3)" text-anchor="middle">Cầu Rồng</text>
+            <!-- River -->
+            <path d="M 0,240 Q 100,230 200,240 Q 260,248 350,240" fill="none" stroke="rgba(0,100,200,0.2)" stroke-width="12"/>
+            <!-- District labels -->
+            <text x="120" y="155" font-family="Be Vietnam Pro" font-size="10" fill="rgba(255,255,255,0.12)" text-anchor="middle">Hải Châu</text>
+            <text x="335" y="155" font-family="Be Vietnam Pro" font-size="10" fill="rgba(255,255,255,0.12)" text-anchor="middle">Sơn Trà</text>
+            <text x="120" y="310" font-family="Be Vietnam Pro" font-size="10" fill="rgba(255,255,255,0.12)" text-anchor="middle">Thanh Khê</text>
+            <text x="290" y="310" font-family="Be Vietnam Pro" font-size="10" fill="rgba(255,255,255,0.12)" text-anchor="middle">Ngũ Hành Sơn</text>
+            <!-- Route lines (animated) -->
+            <g id="routeLines"></g>
+          </svg>
+
+          <!-- Customer pin -->
+          <div class="customer-pin" id="customerPin" style="left:50%;top:50%;display:none;">
+            <div class="customer-pin-inner"></div>
+          </div>
+
+          <!-- Worker markers -->
+          <div class="worker-marker" id="w1" style="left:25%;top:35%">
+            <div class="pulse-ring"></div>
+            <div class="worker-dot">👷</div>
+            <div class="worker-name-tag">Minh T.</div>
+          </div>
+          <div class="worker-marker" id="w2" style="left:60%;top:25%">
+            <div class="worker-dot">👩‍🔧</div>
+            <div class="worker-name-tag">Lan N.</div>
+          </div>
+          <div class="worker-marker" id="w3" style="left:40%;top:65%">
+            <div class="worker-dot">👨‍🔧</div>
+            <div class="worker-name-tag">Hoàng B.</div>
+          </div>
+
+          <!-- ETA badge -->
+          <div class="eta-badge">
+            <div class="eta-label">ETA dự kiến</div>
+            <div class="eta-value" id="etaVal">--</div>
+            <div class="eta-unit">phút</div>
+          </div>
+
+          <!-- Map controls -->
+          <div class="map-overlay">
+            <div class="map-btn active">Live</div>
+            <div class="map-btn">Satellite</div>
+            <div class="map-btn" id="dispatchBtn" onclick="triggerDispatch()">⚡ Dispatch Demo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Log + Workers -->
+      <div class="reveal" style="transition-delay:.2s;display:flex;flex-direction:column;gap:20px;">
+        <div class="order-log">
+          <div class="log-title">
+            <span>Nhật ký đơn hàng</span>
+            <span class="live-dot">LIVE</span>
+          </div>
+          <div class="log-entries" id="logEntries">
+            <div class="log-entry completed">
+              <div class="log-time">09:14:23</div>
+              <div class="log-msg"><span class="log-icon">✅</span> Đơn #DN-2847 hoàn thành · 4★★★★</div>
+            </div>
+            <div class="log-entry en-route">
+              <div class="log-time">09:31:07</div>
+              <div class="log-msg"><span class="log-icon">🔵</span> Lan N. đang di chuyển → 42 Lê Duẩn</div>
+            </div>
+            <div class="log-entry confirmed">
+              <div class="log-time">09:45:18</div>
+              <div class="log-msg"><span class="log-icon">✦</span> Đơn mới #DN-2851 — AI phân công Minh T.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Worker cards -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
+          <div class="detection-title" style="margin-bottom:14px;">👥 Nhân viên đang hoạt động</div>
+          <div class="worker-cards">
+            <div class="worker-card">
+              <div class="wc-avatar">👷</div>
+              <div class="wc-info">
+                <div class="wc-name">Nguyễn Minh Tâm</div>
+                <div class="wc-status">Sẵn sàng · Hải Châu</div>
+              </div>
+              <div class="wc-badge">2.1km</div>
+            </div>
+            <div class="worker-card">
+              <div class="wc-avatar">👩‍🔧</div>
+              <div class="wc-info">
+                <div class="wc-name">Trần Thị Lan</div>
+                <div class="wc-status">Đang dọn · Sơn Trà</div>
+              </div>
+              <div class="wc-badge">4.8km</div>
+            </div>
+            <div class="worker-card">
+              <div class="wc-avatar">👨‍🔧</div>
+              <div class="wc-info">
+                <div class="wc-name">Lê Văn Hoàng</div>
+                <div class="wc-status">Sẵn sàng · Ngũ Hành Sơn</div>
+              </div>
+              <div class="wc-badge">3.4km</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BOOKING WIZARD ═══════════ -->
+<section id="booking-section">
+  <div class="booking-container">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-tag" style="justify-content:center;">Đặt lịch dọn dẹp</div>
+      <h2 class="section-title">Chỉ 3 bước đơn giản</h2>
+      <p class="section-sub" style="margin:12px auto 0;">Quy trình nhanh gọn, đặt trong 90 giây.</p>
+    </div>
+
+    <!-- Step indicators -->
+    <div class="wizard-steps reveal" style="transition-delay:.1s;position:relative;">
+      <div class="step-item">
+        <div class="step-circle active" id="sc1">1</div>
+        <div class="step-line" id="sl1"></div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle" id="sc2">2</div>
+        <div class="step-line" id="sl2"></div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle" id="sc3">3</div>
+        <div class="step-line" id="sl3"></div>
+      </div>
+      <div class="step-item" style="flex:0;">
+        <div class="step-circle" id="sc4">✓</div>
+      </div>
+    </div>
+
+    <!-- Panel 1: Address & Service -->
+    <div class="wizard-panel active" id="panel1">
+      <div class="wizard-grid reveal">
+        <div class="input-group">
+          <label class="input-label">📍 Địa chỉ của bạn</label>
+          <input class="input-field" placeholder="VD: 42 Lê Duẩn, Hải Châu, Đà Nẵng" id="addr" value="">
+        </div>
+        <div class="input-group">
+          <label class="input-label">📱 Số điện thoại</label>
+          <input class="input-field" placeholder="0905 xxx xxx" type="tel">
+        </div>
+      </div>
+      <div style="margin-top:28px;" class="reveal" style="transition-delay:.1s">
+        <div class="input-label" style="margin-bottom:16px;">🧹 Chọn dịch vụ</div>
+        <div class="service-cards" id="serviceCards">
+          <div class="service-card selected" onclick="selectService(this,'Vệ sinh căn hộ',80000)">
+            <div class="sc-icon">🏠</div>
+            <div class="sc-name">Căn hộ</div>
+            <div class="sc-price">80k/giờ</div>
+          </div>
+          <div class="service-card" onclick="selectService(this,'Vệ sinh văn phòng',95000)">
+            <div class="sc-icon">🏢</div>
+            <div class="sc-name">Văn phòng</div>
+            <div class="sc-price">95k/giờ</div>
+          </div>
+          <div class="service-card" onclick="selectService(this,'Tổng vệ sinh',120000)">
+            <div class="sc-icon">✨</div>
+            <div class="sc-name">Tổng VS</div>
+            <div class="sc-price">120k/giờ</div>
+          </div>
+        </div>
+      </div>
+      <div class="wizard-nav">
+        <button class="step-next" onclick="goStep(2)">Tiếp theo →</button>
+      </div>
+    </div>
+
+    <!-- Panel 2: Area & Time -->
+    <div class="wizard-panel" id="panel2">
+      <div class="wizard-grid reveal">
+        <div class="input-group">
+          <label class="input-label">📐 Diện tích (m²)</label>
+          <div class="range-wrapper">
+            <input type="range" class="range-input" min="20" max="500" value="60" id="areaSlider" oninput="updateCalc()">
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-dim);">
+              <span>20m²</span>
+              <span id="areaDisplay" style="color:var(--primary);font-weight:700;font-size:14px;">60m²</span>
+              <span>500m²</span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">📅 Ngày hẹn</label>
+          <input class="input-field" type="date" id="dateInput">
+        </div>
+        <div class="input-group">
+          <label class="input-label">🕐 Giờ hẹn</label>
+          <select class="input-field">
+            <option>8:00 sáng</option>
+            <option>9:00 sáng</option>
+            <option>10:00 sáng</option>
+            <option selected>14:00 chiều</option>
+            <option>15:00 chiều</option>
+            <option>16:00 chiều</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">📝 Ghi chú</label>
+          <input class="input-field" placeholder="Có vật nuôi, tầng 5, có thang máy...">
+        </div>
+      </div>
+
+      <!-- Price Summary -->
+      <div class="price-summary reveal" style="transition-delay:.1s">
+        <div class="ps-row">
+          <span class="ps-label">Dịch vụ</span>
+          <span class="ps-value" id="svcName">Vệ sinh căn hộ</span>
+        </div>
+        <div class="ps-row">
+          <span class="ps-label">Diện tích</span>
+          <span class="ps-value" id="areaVal">60 m²</span>
+        </div>
+        <div class="ps-row">
+          <span class="ps-label">Thời gian dự kiến</span>
+          <span class="ps-value" id="timeVal" style="color:var(--primary);">2.0 giờ</span>
+        </div>
+        <div class="ps-row ps-total">
+          <span class="ps-label">Tổng chi phí</span>
+          <span class="ps-value" id="totalVal">160,000đ</span>
+        </div>
+      </div>
+
+      <div class="time-estimate">
+        <div class="te-box">
+          <div class="te-value" id="teHours">2.0</div>
+          <div class="te-label">Giờ làm việc</div>
+        </div>
+        <div class="te-box">
+          <div class="te-value" id="teWorkers">1</div>
+          <div class="te-label">Nhân viên</div>
+        </div>
+        <div class="te-box">
+          <div class="te-value" id="tePrice">160k</div>
+          <div class="te-label">Chi phí</div>
+        </div>
+      </div>
+
+      <div class="wizard-nav">
+        <button class="step-back" onclick="goStep(1)">← Quay lại</button>
+        <button class="step-next" onclick="goStep(3)">Tiếp theo →</button>
+      </div>
+    </div>
+
+    <!-- Panel 3: Confirm -->
+    <div class="wizard-panel" id="panel3">
+      <div class="confirm-card reveal">
+        <div class="confirm-row">
+          <span class="confirm-key">📍 Địa chỉ</span>
+          <span class="confirm-val" id="confAddr">42 Lê Duẩn, Hải Châu</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-key">🧹 Dịch vụ</span>
+          <span class="confirm-val" id="confSvc">Vệ sinh căn hộ</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-key">📐 Diện tích</span>
+          <span class="confirm-val" id="confArea">60 m²</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-key">📅 Lịch hẹn</span>
+          <span class="confirm-val" id="confDate">14:00 hôm nay</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-key">⏱ Thời gian</span>
+          <span class="confirm-val" id="confTime" style="color:var(--primary);">2.0 giờ</span>
+        </div>
+        <div class="confirm-row ps-total" style="background:rgba(0,229,160,0.05);border-radius:10px;padding:16px;margin-top:8px;">
+          <span class="confirm-key" style="font-size:16px;font-weight:700;color:var(--text);">💰 Tổng tiền</span>
+          <span class="confirm-val" id="confTotal" style="font-size:26px;font-weight:900;color:var(--primary);font-family:'Space Mono',monospace;">160,000đ</span>
+        </div>
+      </div>
+      <div class="wizard-nav">
+        <button class="step-back" onclick="goStep(2)">← Quay lại</button>
+        <button class="step-next" onclick="confirmBooking()" style="background:var(--accent);box-shadow:0 4px 20px rgba(255,107,53,0.4);">🚀 Xác nhận đặt lịch</button>
+      </div>
+    </div>
+
+    <!-- Panel 4: Success -->
+    <div class="wizard-panel" id="panel4">
+      <div class="success-state">
+        <div class="success-icon">🎉</div>
+        <h3 class="success-title">Đặt lịch thành công!</h3>
+        <div class="order-id" id="successId">DN-2852</div>
+        <p class="success-sub">AI đã phân công nhân viên gần nhất.<br>Bạn sẽ nhận SMS xác nhận trong 2 phút.<br>Nhân viên sẽ đến trong <strong style="color:var(--primary);">29 phút</strong>.</p>
+        <button class="btn-primary" style="margin-top:28px;" onclick="goStep(1)">Đặt lịch khác</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STAFF DASHBOARD ═══════════ -->
+<section id="staff-section">
+  <div class="staff-container">
+    <div class="reveal">
+      <div class="section-tag">Staff Dashboard</div>
+      <h2 class="section-title">App nhân viên<br>thế hệ mới</h2>
+      <p class="section-sub">Nhận đơn, điều hướng, báo cáo — tất cả trong một ứng dụng.</p>
+    </div>
+
+    <div class="staff-layout">
+      <!-- Mobile App Frame -->
+      <div class="reveal" style="transition-delay:.15s;">
+        <div class="app-frame">
+          <div class="app-screen">
+            <div class="app-status-bar">
+              <span class="app-time" id="appTime">09:45</span>
+              <div class="app-icons">📶 🔋</div>
+            </div>
+            <div class="app-header">
+              <div class="app-avatar">👷</div>
+              <div style="flex:1">
+                <div class="app-user-name">Nguyễn Minh Tâm</div>
+                <div class="app-user-status">Đang trực tuyến</div>
+              </div>
+              <div style="font-size:20px;cursor:pointer;">🔔</div>
+            </div>
+            <div class="app-earnings-strip">
+              <div class="ae-item">
+                <div class="ae-value">285k</div>
+                <div class="ae-label">Hôm nay</div>
+              </div>
+              <div class="ae-item">
+                <div class="ae-value">4</div>
+                <div class="ae-label">Đơn</div>
+              </div>
+              <div class="ae-item">
+                <div class="ae-value">4.9★</div>
+                <div class="ae-label">Đánh giá</div>
+              </div>
+            </div>
+            <div class="app-tabs">
+              <div class="app-tab active">Đơn hàng</div>
+              <div class="app-tab">Bản đồ</div>
+              <div class="app-tab">Thu nhập</div>
+            </div>
+            <div class="app-orders" id="appOrders">
+              <!-- New order -->
+              <div class="app-order new-order" id="newOrder">
+                <div class="ao-header">
+                  <span class="ao-id">#DN-2852</span>
+                  <span class="ao-badge new">🔔 MỚI</span>
+                </div>
+                <div class="ao-body">
+                  <div class="ao-address">📍 42 Lê Duẩn, P. Hải Châu 1</div>
+                  <div class="ao-meta">
+                    <span>🏠 Căn hộ 60m²</span>
+                    <span>⏱ 2 giờ</span>
+                    <span>💰 160k</span>
+                  </div>
+                </div>
+                <div class="ao-actions">
+                  <button class="ao-btn-accept" onclick="acceptOrder()">✓ Nhận đơn</button>
+                  <button class="ao-btn-decline" onclick="declineOrder()">✕</button>
+                </div>
+              </div>
+              <!-- Active order -->
+              <div class="app-order">
+                <div class="ao-header">
+                  <span class="ao-id">#DN-2849</span>
+                  <span class="ao-badge active">● Đang làm</span>
+                </div>
+                <div class="ao-body" style="padding:10px 14px">
+                  <div class="ao-address">📍 15 Nguyễn Văn Linh</div>
+                  <div class="ao-meta">
+                    <span>🏢 Văn phòng 85m²</span>
+                    <span>⏱ Còn 45 phút</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Done order -->
+              <div class="app-order">
+                <div class="ao-header">
+                  <span class="ao-id">#DN-2847</span>
+                  <span class="ao-badge done">✓ Hoàn thành</span>
+                </div>
+                <div class="ao-body" style="padding:10px 14px">
+                  <div class="ao-address">📍 88 Hùng Vương, Đà Nẵng</div>
+                  <div class="ao-meta">
+                    <span>🏠 Căn hộ · 2h30</span>
+                    <span>★ 5.0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="app-bottom-nav">
+              <div class="bn-item active"><div class="bn-icon">📋</div><div>Đơn hàng</div></div>
+              <div class="bn-item"><div class="bn-icon">🗺</div><div>Bản đồ</div></div>
+              <div class="bn-item"><div class="bn-icon">💰</div><div>Thu nhập</div></div>
+              <div class="bn-item"><div class="bn-icon">👤</div><div>Hồ sơ</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="staff-right reveal" style="transition-delay:.2s">
+        <div class="staff-kpi">
+          <div class="kpi-card">
+            <div class="kpi-icon">📦</div>
+            <div class="kpi-val">127</div>
+            <div class="kpi-name">Đơn tháng này</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">💰</div>
+            <div class="kpi-val">8.4M</div>
+            <div class="kpi-name">Thu nhập (VNĐ)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">⭐</div>
+            <div class="kpi-val">4.91</div>
+            <div class="kpi-name">Rating trung bình</div>
+          </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="staff-activity">
+          <div class="sa-title">Hoạt động hôm nay</div>
+          <div class="activity-items" id="activityFeed">
+            <div class="act-item">
+              <div class="act-line">
+                <div class="act-dot" style="background:var(--primary)"></div>
+                <div class="act-connector"></div>
+              </div>
+              <div class="act-info">
+                <div class="act-title">Nhận đơn #DN-2849</div>
+                <div class="act-detail">Văn phòng 85m² · 15 Nguyễn Văn Linh</div>
+                <div class="act-time">09:20:14</div>
+              </div>
+            </div>
+            <div class="act-item">
+              <div class="act-line">
+                <div class="act-dot" style="background:#3B82F6"></div>
+                <div class="act-connector"></div>
+              </div>
+              <div class="act-info">
+                <div class="act-title">Hoàn thành #DN-2847</div>
+                <div class="act-detail">Căn hộ 60m² · Đánh giá 5★</div>
+                <div class="act-time">09:14:55</div>
+              </div>
+            </div>
+            <div class="act-item">
+              <div class="act-line">
+                <div class="act-dot" style="background:#F59E0B"></div>
+                <div class="act-connector"></div>
+              </div>
+              <div class="act-info">
+                <div class="act-title">Bắt đầu ca làm việc</div>
+                <div class="act-detail">Đăng nhập từ Hải Châu, Đà Nẵng</div>
+                <div class="act-time">07:58:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accept notification -->
+        <div id="acceptNotif" style="display:none;background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.3);border-radius:var(--radius);padding:20px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="font-size:28px;">🎯</div>
+            <div>
+              <div style="font-weight:700;margin-bottom:4px;">Đã nhận đơn #DN-2852!</div>
+              <div style="font-size:13px;color:var(--text-muted);">Bản đồ đã cập nhật · Điều hướng đến 42 Lê Duẩn</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--bg);border-top:1px solid var(--border);padding:40px;text-align:center;">
+  <div class="nav-logo" style="justify-content:center;margin-bottom:12px;">
+    <div class="dot"></div>Smart<span>Clean</span> AI
+  </div>
+  <p style="color:var(--text-dim);font-size:13px;">© 2025 SmartClean AI · Đà Nẵng · Powered by Computer Vision</p>
+</footer>
+
+<script>
+/* ─── COUNTER ANIMATION ─── */
+function animateCounter(el, target, suffix, duration=2000) {
+  const isFloat = String(target).includes('.');
+  const decimals = isFloat ? String(target).split('.')[1].length : 0;
+  let start = 0;
+  const increment = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += increment;
+    if (start >= target) {
+      start = target;
+      clearInterval(timer);
+    }
+    el.textContent = (isFloat ? start.toFixed(decimals) : Math.floor(start).toLocaleString()) + suffix;
+  }, 16);
+}
+
+/* ─── SCROLL REVEAL ─── */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, {threshold:0.1});
+revealEls.forEach(el => observer.observe(el));
+
+/* ─── HERO COUNTERS ─── */
+const heroObserver = new IntersectionObserver((entries) => {
+  if(entries[0].isIntersecting) {
+    document.querySelectorAll('.stat-number').forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      animateCounter(el, target, suffix);
+    });
+    heroObserver.disconnect();
+  }
+}, {threshold:0.3});
+heroObserver.observe(document.getElementById('hero'));
+
+/* ─── BEFORE/AFTER SLIDER ─── */
+const baWrap = document.getElementById('baWrap');
+const baAfter = document.getElementById('baAfter');
+const baHandle = document.getElementById('baHandle');
+let isDragging = false;
+let baPos = 50;
+
+// All dirty boxes and clean boxes
+const dirtyBoxes = document.querySelectorAll('.ai-bbox[data-side="dirty"]');
+const cleanBoxes = document.querySelectorAll('.ai-bbox[data-side="clean"]');
+
+function setBAPos(pct) {
+  pct = Math.max(3, Math.min(97, pct));
+  baPos = pct;
+
+  // Clip the AFTER image: show left portion equal to pct
+  baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+  baHandle.style.left = pct + '%';
+
+  // Dirty boxes: fade out as handle moves right (AFTER takes over)
+  // Fully visible when pct < 35, fully hidden when pct > 65
+  const dirtyOp = Math.max(0, Math.min(1, (65 - pct) / 30));
+  dirtyBoxes.forEach(b => b.style.opacity = dirtyOp);
+
+  // Clean boxes: fade in as handle moves right
+  // Fully hidden when pct < 35, fully visible when pct > 65
+  const cleanOp = Math.max(0, Math.min(1, (pct - 35) / 30));
+  cleanBoxes.forEach(b => b.style.opacity = cleanOp);
+}
+
+setBAPos(50);
+
+baWrap.addEventListener('mousedown', e => { isDragging = true; e.preventDefault(); });
+window.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const rect = baWrap.getBoundingClientRect();
+  const pct = ((e.clientX - rect.left) / rect.width) * 100;
+  setBAPos(pct);
+});
+window.addEventListener('mouseup', () => isDragging = false);
+
+baWrap.addEventListener('touchstart', e => { isDragging = true; }, {passive:true});
+window.addEventListener('touchmove', e => {
+  if (!isDragging) return;
+  const rect = baWrap.getBoundingClientRect();
+  const pct = ((e.touches[0].clientX - rect.left) / rect.width) * 100;
+  setBAPos(pct);
+}, {passive:true});
+window.addEventListener('touchend', () => isDragging = false);
+
+// Auto-demo: sweep left→right→stop so user sees the effect
+let autoAnim = null;
+setTimeout(() => {
+  let p = 80; let dir = -1; let paused = false;
+  setBAPos(p);
+  autoAnim = setInterval(() => {
+    if (paused) return;
+    p += dir * 0.6;
+    if (p <= 15) { dir = 1; paused = true; setTimeout(()=>{paused=false;}, 600); }
+    if (p >= 85) { dir = -1; paused = true; setTimeout(()=>{paused=false;}, 600); }
+    setBAPos(p);
+  }, 16);
+  const stopAuto = () => { if (autoAnim) { clearInterval(autoAnim); autoAnim = null; } };
+  baWrap.addEventListener('mousedown', stopAuto, {once:true});
+  baWrap.addEventListener('touchstart', stopAuto, {once:true});
+  setTimeout(() => stopAuto(), 7000);
+}, 1800);
+
+/* ─── SMART DISPATCH ─── */
+const workers = [
+  {el: document.getElementById('w1'), paths: [{x:25,y:35},{x:35,y:42},{x:45,y:48},{x:50,y:50}]},
+  {el: document.getElementById('w2'), paths: [{x:60,y:25},{x:55,y:35},{x:52,y:42},{x:50,y:50}]},
+  {el: document.getElementById('w3'), paths: [{x:40,y:65},{x:43,y:58},{x:47,y:53},{x:50,y:50}]},
+];
+
+let dispatchActive = false;
+
+function triggerDispatch() {
+  if (dispatchActive) return;
+  dispatchActive = true;
+  const btn = document.getElementById('dispatchBtn');
+  btn.textContent = '⚡ Dispatching...';
+  btn.style.color = 'var(--primary)';
+
+  // Show customer pin
+  const pin = document.getElementById('customerPin');
+  pin.style.display = 'block';
+
+  // Add log entry
+  addLogEntry('confirmed', '🤖 AI đang phân công nhân viên tối ưu...');
+
+  setTimeout(() => {
+    addLogEntry('confirmed', '✦ AI chọn Minh T. (2.1km) · ETA 12 phút');
+    document.getElementById('etaVal').textContent = '12';
+    // Move worker 1 toward customer
+    moveWorker(workers[0], 0);
+  }, 1200);
+
+  setTimeout(() => {
+    addLogEntry('en-route', '🔵 Minh T. đang di chuyển đến địa điểm');
+  }, 2500);
+
+  setTimeout(() => {
+    addLogEntry('arrived', '📍 Minh T. đã đến nơi · Bắt đầu dọn dẹp');
+    document.getElementById('etaVal').textContent = '0';
+    btn.textContent = '✓ Completed';
+    dispatchActive = false;
+  }, 6000);
+
+  // Also connect to staff section
+  setTimeout(() => {
+    document.getElementById('acceptNotif').style.display = 'block';
+  }, 3000);
+}
+
+function moveWorker(worker, step) {
+  if (step >= worker.paths.length - 1) return;
+  const next = worker.paths[step + 1];
+  worker.el.style.left = next.x + '%';
+  worker.el.style.top = next.y + '%';
+  setTimeout(() => moveWorker(worker, step + 1), 1200);
+}
+
+function addLogEntry(type, msg) {
+  const log = document.getElementById('logEntries');
+  const entry = document.createElement('div');
+  entry.className = `log-entry ${type}`;
+  const now = new Date();
+  const time = now.toTimeString().slice(0,8);
+  entry.innerHTML = `<div class="log-time">${time}</div><div class="log-msg">${msg}</div>`;
+  log.appendChild(entry);
+  log.scrollTop = log.scrollHeight;
+}
+
+/* ─── BOOKING WIZARD ─── */
+let currentStep = 1;
+let selectedService = {name:'Vệ sinh căn hộ', rate:80000};
+
+function selectService(el, name, rate) {
+  document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedService = {name, rate};
+  updateCalc();
+}
+
+function updateCalc() {
+  const area = parseInt(document.getElementById('areaSlider').value);
+  const hours = Math.max(1, (area / 30)).toFixed(1);
+  const workers_needed = area > 150 ? 2 : 1;
+  const total = Math.round(parseFloat(hours) * selectedService.rate * workers_needed);
+
+  document.getElementById('areaDisplay').textContent = area + 'm²';
+  document.getElementById('areaVal').textContent = area + ' m²';
+  document.getElementById('timeVal').textContent = hours + ' giờ';
+  document.getElementById('totalVal').textContent = total.toLocaleString('vi-VN') + 'đ';
+  document.getElementById('svcName').textContent = selectedService.name;
+
+  // Animate the numbers
+  document.getElementById('teHours').textContent = hours;
+  document.getElementById('teWorkers').textContent = workers_needed;
+  document.getElementById('tePrice').textContent = Math.round(total/1000) + 'k';
+}
+
+function goStep(step) {
+  // Update confirm data
+  if (step === 3) {
+    const area = document.getElementById('areaSlider').value;
+    const hours = Math.max(1, (area / 30)).toFixed(1);
+    const total = Math.round(parseFloat(hours) * selectedService.rate);
+    const addr = document.getElementById('addr').value || '42 Lê Duẩn, Hải Châu';
+    document.getElementById('confAddr').textContent = addr;
+    document.getElementById('confSvc').textContent = selectedService.name;
+    document.getElementById('confArea').textContent = area + ' m²';
+    document.getElementById('confDate').textContent = '14:00 ' + (document.getElementById('dateInput').value || 'hôm nay');
+    document.getElementById('confTime').textContent = hours + ' giờ';
+    document.getElementById('confTotal').textContent = total.toLocaleString('vi-VN') + 'đ';
+  }
+
+  // Hide all panels
+  document.querySelectorAll('.wizard-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel' + step).classList.add('active');
+
+  // Update step circles
+  for (let i = 1; i <= 4; i++) {
+    const sc = document.getElementById('sc' + i);
+    if (!sc) continue;
+    sc.classList.remove('active','done');
+    if (i < step) sc.classList.add('done');
+    else if (i === step) sc.classList.add('active');
+  }
+  // Update step lines
+  for (let i = 1; i <= 3; i++) {
+    const sl = document.getElementById('sl' + i);
+    if (!sl) continue;
+    if (i < step) sl.classList.add('done');
+    else sl.classList.remove('done');
+  }
+  currentStep = step;
+}
+
+function confirmBooking() {
+  goStep(4);
+  const id = 'DN-' + (2850 + Math.floor(Math.random()*20));
+  document.getElementById('successId').textContent = id;
+  // Trigger dispatch animation
+  setTimeout(triggerDispatch, 500);
+}
+
+// Set today's date
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('dateInput').value = today;
+updateCalc();
+
+/* ─── STAFF APP ─── */
+function acceptOrder() {
+  const order = document.getElementById('newOrder');
+  order.classList.remove('new-order');
+  order.querySelector('.ao-badge').className = 'ao-badge active';
+  order.querySelector('.ao-badge').textContent = '● Đang di chuyển';
+  order.querySelector('.ao-actions').innerHTML = `
+    <button class="ao-btn-accept" style="background:#3B82F6">🗺 Điều hướng</button>
+    <button class="ao-btn-decline">📷 Chụp ảnh</button>
+  `;
+
+  // Show accept notification in dashboard
+  document.getElementById('acceptNotif').style.display = 'block';
+
+  // Add to activity feed
+  const feed = document.getElementById('activityFeed');
+  const newAct = document.createElement('div');
+  newAct.className = 'act-item';
+  newAct.style.animation = 'fadeUp .4s ease both';
+  const time = new Date().toTimeString().slice(0,8);
+  newAct.innerHTML = `
+    <div class="act-line">
+      <div class="act-dot" style="background:var(--accent)"></div>
+      <div class="act-connector"></div>
+    </div>
+    <div class="act-info">
+      <div class="act-title">Nhận đơn #DN-2852 🎯</div>
+      <div class="act-detail">Căn hộ 60m² · 42 Lê Duẩn, Hải Châu</div>
+      <div class="act-time">${time}</div>
+    </div>
+  `;
+  feed.insertBefore(newAct, feed.firstChild);
+
+  addLogEntry('confirmed', '✅ Minh T. đã nhận đơn #DN-2852');
+}
+
+function declineOrder() {
+  const order = document.getElementById('newOrder');
+  order.style.opacity = '0';
+  order.style.transform = 'translateX(100%)';
+  order.style.transition = 'all .3s ease';
+  setTimeout(() => order.remove(), 300);
+  addLogEntry('en-route', '↩ Đơn #DN-2852 chuyển cho Lan N.');
+}
+
+/* ─── CLOCK ─── */
+function updateClock() {
+  const now = new Date();
+  document.getElementById('appTime').textContent = now.toTimeString().slice(0,5);
+}
+updateClock();
+setInterval(updateClock, 10000);
+
+/* ─── PARALLAX ─── */
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  const grid = document.querySelector('.hero-grid');
+  if (grid) grid.style.transform = `translate(${x}px,${y}px)`;
+});
+</script>
+</body>
+</html>
