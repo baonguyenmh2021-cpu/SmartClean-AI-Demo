@@ -52,7 +52,7 @@ Dự án được xây dựng với mục tiêu mang lại trải nghiệm "Clea
 
 [ ] Tích hợp API Google Maps thực tế thay vì bản đồ SVG mô phỏng.
 
-##👤 Thông tin tác giả
+## 👤 Thông tin tác giả
 Họ tên: Trần Thị Bảo Nguyên
 
 Vị trí: Tech Lead / Lập trình viên
