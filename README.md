@@ -37,10 +37,12 @@ Dự án được xây dựng với mục tiêu mang lại trải nghiệm "Clea
 * **Map:** Custom SVG Vector Mapping.
 
 ## 📂 Cấu trúc thư mục
+```text
 .
 ├── index.html          # File chính chứa toàn bộ source (HTML, CSS, JS)
 ├── assets/             # Chứa hình ảnh, icons, assets phụ trợ
 └── README.md           # Tài liệu hướng dẫn dự án
+```
 
 ## 🎯 Định hướng phát triển
 [ ] Kết nối thực tế với Model AI  để phân tích ảnh upload từ người dùng.
