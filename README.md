@@ -46,7 +46,7 @@ Dự án được xây dựng với mục tiêu mang lại trải nghiệm "Clea
 ```
 
 ## 🎯 Định hướng phát triển
-[ ] Kết nối thực tế với Model AI (PyTorch/MediaPipe/SVM) để phân tích ảnh upload từ người dùng.
+[ ] Kết nối thực tế với Model AI để phân tích ảnh upload từ người dùng.
 
 [ ] Xây dựng Backend bằng Node.js và CSDL để quản lý thông tin nhân viên, khách hàng và đơn hàng thực tế.
 
