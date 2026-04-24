@@ -55,8 +55,6 @@ Dự án được xây dựng với mục tiêu mang lại trải nghiệm "Clea
 ## 👤 Thông tin tác giả
 Họ tên: Trần Thị Bảo Nguyên
 
-Vị trí: Tech Lead / Lập trình viên
-
 Đơn vị: Đại học Sư phạm - Đại học Đà Nẵng (UED)
 
 Chuyên ngành: Cử nhân Công nghệ thông tin
