@@ -44,14 +44,14 @@ Dự án được xây dựng với mục tiêu mang lại trải nghiệm "Clea
 ├── assets/             # Chứa hình ảnh, icons, assets phụ trợ
 └── README.md           # Tài liệu hướng dẫn dự án
 
-🎯 Định hướng phát triển
+## 🎯 Định hướng phát triển
 [ ] Kết nối thực tế với Model AI (PyTorch/MediaPipe/SVM) để phân tích ảnh upload từ người dùng.
 
 [ ] Xây dựng Backend bằng Node.js và CSDL để quản lý thông tin nhân viên, khách hàng và đơn hàng thực tế.
 
 [ ] Tích hợp API Google Maps thực tế thay vì bản đồ SVG mô phỏng.
 
-👤 Thông tin tác giả
+##👤 Thông tin tác giả
 Họ tên: Trần Thị Bảo Nguyên
 
 Vị trí: Tech Lead / Lập trình viên
