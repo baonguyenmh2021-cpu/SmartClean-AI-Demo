@@ -43,6 +43,7 @@ Dự án được xây dựng với mục tiêu mang lại trải nghiệm "Clea
 ├── index.html          # File chính chứa toàn bộ source (HTML, CSS, JS)
 ├── assets/             # Chứa hình ảnh, icons, assets phụ trợ
 └── README.md           # Tài liệu hướng dẫn dự án
+```
 
 ## 🎯 Định hướng phát triển
 [ ] Kết nối thực tế với Model AI (PyTorch/MediaPipe/SVM) để phân tích ảnh upload từ người dùng.
